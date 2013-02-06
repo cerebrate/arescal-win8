@@ -16,12 +16,18 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="ArkaneSystems.AresCal.App">
       <VisualElements DisplayName="AresCal" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="AresCal" ForegroundText="light" BackgroundColor="#464646">
+        <LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
       </VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="ArkaneSystems.AresCal.TileUpdater.TileUpdater">
+          <BackgroundTasks>
+            <Task Type="timer" />
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
-  <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
 </Package>
