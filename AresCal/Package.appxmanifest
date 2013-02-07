@@ -4,7 +4,7 @@
   <Properties>
     <DisplayName>AresCal</DisplayName>
     <PublisherDisplayName>avatar</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\AresCal-StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.2.1</OSMinVersion>
@@ -15,10 +15,10 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="ArkaneSystems.AresCal.App">
-      <VisualElements DisplayName="AresCal" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="AresCal" ForegroundText="light" BackgroundColor="#464646">
-        <LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
-        <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Assets\SplashScreen.png" />
+      <VisualElements DisplayName="AresCal" Logo="Assets\AresCal-Logo.png" SmallLogo="Assets\AresCal-SmallLogo.png" Description="AresCal" ForegroundText="light" BackgroundColor="#000000">
+        <LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\AresCal-BadgeLogo.png" />
+        <DefaultTile ShowName="allLogos" WideLogo="Assets\AresCal-WideLogo.png" ShortName="AresCal" />
+        <SplashScreen Image="Assets\AresCal-SplashScreen.png" BackgroundColor="#000000" />
         <InitialRotationPreference>
           <Rotation Preference="landscape" />
         </InitialRotationPreference>

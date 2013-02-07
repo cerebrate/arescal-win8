@@ -65,6 +65,17 @@ namespace ArkaneSystems.AresCal
 
             if (roamingSettings.Values.ContainsKey("epEnabled"))
                 EpToggle.IsChecked = (bool)roamingSettings.Values["epEnabled"];
+
+            // Restore values contained in session state.
+            if (pageState != null && pageState.ContainsKey("txtSolDate"))
+            {
+                // If it contains one, it contains all.
+                SolDate.Text = pageState["txtSolDate"].ToString();
+                Date.Text = pageState["txtDate"].ToString();
+                Time.Text = pageState["txtTime"].ToString();
+                TsDate.Text = pageState["txtTranshuman"].ToString();
+                EpDate.Text = pageState["txtEclipsePhase"].ToString();
+            } 
         }
 
         /// <summary>
@@ -74,7 +85,14 @@ namespace ArkaneSystems.AresCal
         /// </summary>
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
-        {}
+        {
+            // Save the current UI text.
+            pageState["txtSolDate"] = SolDate.Text;
+            pageState["txtDate"] = Date.Text;
+            pageState["txtTime"] = Time.Text;
+            pageState["txtTranshuman"] = TsDate.Text;
+            pageState["txtEclipsePhase"] = EpDate.Text;
+        }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -123,6 +141,26 @@ namespace ArkaneSystems.AresCal
         {
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
             roamingSettings.Values["epEnabled"] = EpToggle.IsChecked;
+        }
+
+        public void DoTimeUpdate()
+        {
+            ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+
+            // Get current martian datetime.
+            MartianDateTime mdt = new MartianDateTime();
+
+            SolDate.Text = String.Format("{0:f6}", mdt.MartianSolDate);
+            Time.Text = mdt.Time;
+            Date.Text = mdt.Date;
+
+            if ((roamingSettings.Values.ContainsKey("epEnabled")) &&
+                ((bool)roamingSettings.Values["epEnabled"] == true))
+                EpDate.Text = mdt.EclipsePhaseDate;
+
+            if ((roamingSettings.Values.ContainsKey("tsEnabled")) &&
+                ((bool)roamingSettings.Values["tsEnabled"] == true))
+                TsDate.Text = mdt.TranshumanSpaceDate;
         }
     }
 }

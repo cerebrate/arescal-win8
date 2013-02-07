@@ -23,6 +23,8 @@ namespace ArkaneSystems.AresCal
     /// </summary>
     sealed partial class App : Application
     {
+        private DispatcherTimer tickTimer;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -31,6 +33,7 @@ namespace ArkaneSystems.AresCal
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace ArkaneSystems.AresCal
         /// search results, and so forth.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -52,7 +55,7 @@ namespace ArkaneSystems.AresCal
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    await Common.SuspensionManager.RestoreAsync();
                 }
 
                 // Place the frame in the current Window
@@ -69,8 +72,34 @@ namespace ArkaneSystems.AresCal
                     throw new Exception("Failed to create initial page");
                 }
             }
+
             // Ensure the current window is active
             Window.Current.Activate();
+
+            // Set up and start the tick timer.
+            tickTimer = new DispatcherTimer();
+            tickTimer.Interval = new TimeSpan(0,0,1);
+            tickTimer.Tick += tickTimer_Tick;
+            tickTimer.Start();
+
+            // Force immediate tick.
+            this.tickTimer_Tick(this, null);
+        }
+
+        void tickTimer_Tick(object sender, object e)
+        {
+            // Pass the tick along to the main page, if present, to update itself.
+            Frame frame;
+
+            if ((frame = Window.Current.Content as Frame) != null)
+            {
+                MainPage mp;
+
+                if ((mp = frame.Content as MainPage) != null)
+                {
+                    mp.DoTimeUpdate();
+                }
+            }
         }
 
         /// <summary>
@@ -80,11 +109,23 @@ namespace ArkaneSystems.AresCal
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            // Stop the tick timer.
+            tickTimer.Stop();
+
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+
+            // Save application state and stop any background activity
+            await Common.SuspensionManager.SaveAsync();
+
             deferral.Complete();
+        }
+
+        private void OnResuming(object sender, object e)
+        {
+            // Restart the tick timer.
+            tickTimer.Start();
         }
     }
 }

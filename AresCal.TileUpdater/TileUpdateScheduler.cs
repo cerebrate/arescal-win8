@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
 namespace ArkaneSystems.AresCal.TileUpdater
@@ -31,20 +32,36 @@ namespace ArkaneSystems.AresCal.TileUpdater
             DateTime planTill = now.AddHours(3);
 
             // Perform immediate update.
-            var immediateTile = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText04);
-            immediateTile.GetElementsByTagName("text")[0].InnerText = now.ToString(@"hh:mm A\MT");
+            var immediateTile = MakeTile(now);
 
             updater.Update(new TileNotification(immediateTile) { ExpirationTime = now.AddMinutes(1) } );
 
             for (var startPlanning = updateTime; startPlanning < planTill; startPlanning = startPlanning.AddMinutes(1))
             {
-                var tile = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText04);
-                tile.GetElementsByTagName("text")[0].InnerText = startPlanning.ToString(@"hh:mm A\MT");
+                var tile = MakeTile(startPlanning);
 
                 ScheduledTileNotification scheduled = new ScheduledTileNotification(tile, new DateTimeOffset(startPlanning))
                     {ExpirationTime = startPlanning.AddMinutes(1)};
                 updater.AddToSchedule(scheduled);
             }
+        }
+
+        private static XmlDocument MakeTile (DateTime forTime)
+        {
+            MartianDateTime mdt = new MartianDateTime(forTime);
+
+            var tile = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText04);
+            tile.GetElementsByTagName("text")[0].InnerText = String.Format("{0} AMT", mdt.ShortTime);
+
+            var wideTile = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWideText09);
+            wideTile.GetElementsByTagName("text")[0].InnerText = String.Format("{0} AMT", mdt.ShortTime);
+            wideTile.GetElementsByTagName("text")[1].InnerText = mdt.Date;
+
+            // Mix the payloads.
+            var node = tile.ImportNode(wideTile.GetElementsByTagName("binding")[0], true);
+            tile.GetElementsByTagName("visual")[0].AppendChild(node);
+
+            return tile;
         }
     }
 }
