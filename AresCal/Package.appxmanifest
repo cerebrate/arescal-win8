@@ -3,7 +3,7 @@
   <Identity Name="b606d33b-ba0d-463d-9583-f4e304143638" Publisher="CN=avatar" Version="1.0.0.0" />
   <Properties>
     <DisplayName>AresCal</DisplayName>
-    <PublisherDisplayName>avatar</PublisherDisplayName>
+    <PublisherDisplayName>Arkane Systems</PublisherDisplayName>
     <Logo>Assets\AresCal-StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>

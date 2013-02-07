@@ -17,16 +17,7 @@
 
             <!-- application name -->
             <x:String x:Key="AppName">AresCal</x:String>
-
-            <!-- background image brushes -->
-            <ImageBrush x:Key="MarsBrush1" ImageSource="Assets/Mars/mars_1.jpg" Stretch="UniformToFill"/>
-            <ImageBrush x:Key="MarsBrush2" ImageSource="Assets/Mars/mars_2.jpg" Stretch="UniformToFill"/>
-            <ImageBrush x:Key="MarsBrush3" ImageSource="Assets/Mars/mars_3.jpg" Stretch="UniformToFill"/>
-            <ImageBrush x:Key="MarsBrush4" ImageSource="Assets/Mars/mars_4.jpg" Stretch="UniformToFill"/>
-            <ImageBrush x:Key="MarsBrush5" ImageSource="Assets/Mars/mars_5.jpg" Stretch="UniformToFill"/>
-            <ImageBrush x:Key="MarsBrush6" ImageSource="Assets/Mars/mars_6.jpg" Stretch="UniformToFill"/>
-            <ImageBrush x:Key="MarsBrush7" ImageSource="Assets/Mars/mars_7.jpg" Stretch="UniformToFill"/>
-            
+        
             <!-- AppBar buttons -->
             <Style x:Key="ToggleAppBarButtonStyle" TargetType="ToggleButton">
                 <Setter Property="Foreground" Value="{StaticResource AppBarItemForegroundThemeBrush}" />

@@ -20,9 +20,16 @@ using System.Threading.Tasks;
 using ArkaneSystems.AresCal.Common;
 using ArkaneSystems.AresCal.TileUpdater;
 
+using Callisto.Controls;
+
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
+using Windows.UI;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -38,9 +45,61 @@ namespace ArkaneSystems.AresCal
         private const string TASK_NAME_TIMER = "TileUpdaterTime";
         private const string TASK_ENTRY = "ArkaneSystems.AresCal.TileUpdater.TileUpdater";
 
+        private int cachedDayOfWeek = 0;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
+        }
+
+        private void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            ResourceLoader rl = new ResourceLoader();
+
+            SettingsCommand sc = new SettingsCommand("options", rl.GetString("OptionsCommandText"), (x) =>
+            {
+                // Create a new instance of the flyout.
+                SettingsFlyout settings = new SettingsFlyout();
+
+                // Change header and content background colors away from defaults.
+                settings.HeaderBrush = new SolidColorBrush(Colors.DarkGray);
+                settings.HeaderText = rl.GetString("OptionsCommandText");
+
+                // Provide logo.
+                BitmapImage bmp = new BitmapImage(new Uri("ms-appx:///Assets/AresCal-SmallLogo.png"));
+                settings.SmallLogoImageSource = bmp;
+
+                // Set content for the flyout.
+                settings.Content = new SettingsContent();
+
+                // Open it.
+                settings.IsOpen = true;
+            });
+
+            SettingsCommand pc = new SettingsCommand("privacy", rl.GetString("PrivacyCommandText"), (x) =>
+            {
+                // Create a new instance of the flyout.
+                SettingsFlyout settings = new SettingsFlyout();
+
+                // Change header and content background colors away from defaults.
+                settings.HeaderBrush = new SolidColorBrush(Colors.DarkGray);
+                settings.HeaderText = rl.GetString("PrivacyCommandText");
+
+                // Provide logo.
+                BitmapImage bmp = new BitmapImage(new Uri("ms-appx:///Assets/AresCal-SmallLogo.png"));
+                settings.SmallLogoImageSource = bmp;
+
+                // Set content for the flyout.
+                settings.Content = new PrivacyContent();
+
+                // Open it.
+                settings.IsOpen = true;
+            });
+
+            args.Request.ApplicationCommands.Add(sc);
+            args.Request.ApplicationCommands.Add(pc);
         }
 
         /// <summary>
@@ -161,6 +220,54 @@ namespace ArkaneSystems.AresCal
             if ((roamingSettings.Values.ContainsKey("tsEnabled")) &&
                 ((bool)roamingSettings.Values["tsEnabled"] == true))
                 TsDate.Text = mdt.TranshumanSpaceDate;
+
+            // If necessary, update background.
+            if (mdt.DayOfWeek != this.cachedDayOfWeek)
+            {
+                this.cachedDayOfWeek = mdt.DayOfWeek;
+                this.DoBackgroundUpdate(mdt.DayOfWeek);
+            }
+        }
+
+        public void DoBackgroundUpdate(int selection)
+        {
+            BitmapImage backgroundImage;
+
+            switch (selection)
+            {
+                case 1:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_1.jpg"));
+                    break;
+
+                case 2:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_2.jpg"));
+                    break;
+
+                case 3:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_3.jpg"));
+                    break;
+
+                case 4:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_4.jpg"));
+                    break;
+
+                case 5:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_5.jpg"));
+                    break;
+
+                case 6:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_6.jpg"));
+                    break;
+
+                case 7:
+                    backgroundImage = new BitmapImage(new Uri("ms-appx:///Assets/Mars/mars_7.jpg"));
+                    break;
+
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+
+            ContentGrid.Background = new ImageBrush() { ImageSource = backgroundImage, Stretch = Stretch.UniformToFill, Opacity = 0.8};
         }
     }
 }
