@@ -21,6 +21,7 @@ using ArkaneSystems.AresCal.Common;
 using ArkaneSystems.AresCal.TileUpdater;
 
 using Windows.ApplicationModel.Background;
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -55,7 +56,16 @@ namespace ArkaneSystems.AresCal
         ///     session.  This will be null the first time a page is visited.
         /// </param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
-        {}
+        {
+            // Restore values contained in app data.
+            ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+
+            if (roamingSettings.Values.ContainsKey("tsEnabled"))
+                TsToggle.IsChecked = (bool)roamingSettings.Values["tsEnabled"];
+
+            if (roamingSettings.Values.ContainsKey("epEnabled"))
+                EpToggle.IsChecked = (bool)roamingSettings.Values["epEnabled"];
+        }
 
         /// <summary>
         ///     Preserves state associated with this page in case the application is suspended or the
@@ -101,6 +111,18 @@ namespace ArkaneSystems.AresCal
                 builderUser.SetTrigger(new SystemTrigger(SystemTriggerType.UserPresent, false));
                 builderUser.Register();
             }
+        }
+
+        private void TsToggle_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["tsEnabled"] = TsToggle.IsChecked;
+        }
+
+        private void EpToggle_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["epEnabled"] = EpToggle.IsChecked;
         }
     }
 }

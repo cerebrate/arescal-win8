@@ -19,6 +19,9 @@
         <LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
+        <InitialRotationPreference>
+          <Rotation Preference="landscape" />
+        </InitialRotationPreference>
       </VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="ArkaneSystems.AresCal.TileUpdater.TileUpdater">
@@ -30,4 +33,7 @@
       </Extensions>
     </Application>
   </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
 </Package>

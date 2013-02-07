@@ -167,6 +167,13 @@
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\Mars\mars_1.jpg" />
+    <Content Include="Assets\Mars\mars_2.jpg" />
+    <Content Include="Assets\Mars\mars_3.jpg" />
+    <Content Include="Assets\Mars\mars_4.jpg" />
+    <Content Include="Assets\Mars\mars_5.jpg" />
+    <Content Include="Assets\Mars\mars_6.jpg" />
+    <Content Include="Assets\Mars\mars_7.jpg" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
@@ -186,6 +193,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="MSAdvertisingXaml, Version=6.1">
+      <Name>MSAdvertisingXaml</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

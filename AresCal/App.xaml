@@ -2,7 +2,7 @@
     x:Class="ArkaneSystems.AresCal.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ArkaneSystems.AresCal">
+    xmlns:local="using:ArkaneSystems.AresCal" RequestedTheme="Dark">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -12,8 +12,174 @@
                     Styles that define common aspects of the platform look and feel
                     Required by Visual Studio project and item templates
                  -->
-                <ResourceDictionary Source="Common/StandardStyles.xaml"/>
+                <ResourceDictionary Source="Common/StandardStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- application name -->
+            <x:String x:Key="AppName">AresCal</x:String>
+
+            <!-- background image brushes -->
+            <ImageBrush x:Key="MarsBrush1" ImageSource="Assets/Mars/mars_1.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="MarsBrush2" ImageSource="Assets/Mars/mars_2.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="MarsBrush3" ImageSource="Assets/Mars/mars_3.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="MarsBrush4" ImageSource="Assets/Mars/mars_4.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="MarsBrush5" ImageSource="Assets/Mars/mars_5.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="MarsBrush6" ImageSource="Assets/Mars/mars_6.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="MarsBrush7" ImageSource="Assets/Mars/mars_7.jpg" Stretch="UniformToFill"/>
+            
+            <!-- AppBar buttons -->
+            <Style x:Key="ToggleAppBarButtonStyle" TargetType="ToggleButton">
+                <Setter Property="Foreground" Value="{StaticResource AppBarItemForegroundThemeBrush}" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="AutomationProperties.ItemType" Value="App Bar ToggleButton" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid x:Name="RootGrid" Width="100" Background="Transparent">
+                                <StackPanel VerticalAlignment="Top" Margin="0,12,0,11">
+                                    <Grid Width="40" Height="40" Margin="0,0,0,5" HorizontalAlignment="Center">
+                                        <TextBlock x:Name="BackgroundGlyph" Text="&#xE0A8;"
+                                                   FontFamily="Segoe UI Symbol" FontSize="53.333" Margin="-4,-19,0,0"
+                                                   Foreground="{StaticResource AppBarItemBackgroundThemeBrush}" />
+                                        <TextBlock x:Name="OutlineGlyph" Text="&#xE0A7;" FontFamily="Segoe UI Symbol"
+                                                   FontSize="53.333" Margin="-4,-19,0,0" />
+                                        <ContentPresenter x:Name="Content" HorizontalAlignment="Center"
+                                                          Margin="-1,-1,0,0" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <TextBlock
+                                        x:Name="TextLabel"
+                                        Text="{TemplateBinding AutomationProperties.Name}"
+                                        Foreground="{StaticResource AppBarItemForegroundThemeBrush}"
+                                        Margin="0,0,2,0"
+                                        FontSize="12"
+                                        TextAlignment="Center"
+                                        Width="88"
+                                        MaxHeight="32"
+                                        TextTrimming="WordEllipsis"
+                                        Style="{StaticResource BasicTextStyle}" />
+                                </StackPanel>
+                                <Rectangle
+                                    x:Name="FocusVisualWhite"
+                                    IsHitTestVisible="False"
+                                    Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
+                                    StrokeEndLineCap="Square"
+                                    StrokeDashArray="1,1"
+                                    Opacity="0"
+                                    StrokeDashOffset="1.5" />
+                                <Rectangle
+                                    x:Name="FocusVisualBlack"
+                                    IsHitTestVisible="False"
+                                    Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}"
+                                    StrokeEndLineCap="Square"
+                                    StrokeDashArray="1,1"
+                                    Opacity="0"
+                                    StrokeDashOffset="0.5" />
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundGlyph"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemPointerOverBackgroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemPointerOverForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed" />
+                                        <VisualState x:Name="Disabled" />
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineGlyph"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundGlyph"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemPressedForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineGlyph"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundGlyph"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{StaticResource AppBarItemPressedForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPressed" />
+                                        <VisualState x:Name="CheckedDisabled" />
+                                        <VisualState x:Name="Indeterminate" />
+                                        <VisualState x:Name="IndeterminatePointerOver" />
+                                        <VisualState x:Name="IndeterminatePressed" />
+                                        <VisualState x:Name="IndeterminateDisabled" />
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="FocusVisualWhite"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="FocusVisualBlack"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="TsAppBarButtonStyle" TargetType="ToggleButton"
+                   BasedOn="{StaticResource ToggleAppBarButtonStyle}">
+                <Setter Property="AutomationProperties.AutomationId" Value="TsAppBarButton" />
+                <Setter Property="AutomationProperties.Name" Value="Transhuman Space" />
+                <Setter Property="Content" Value="&#xE10B;" />
+            </Style>
+
+            <Style x:Key="EpAppBarButtonStyle" TargetType="ToggleButton"
+                   BasedOn="{StaticResource ToggleAppBarButtonStyle}">
+                <Setter Property="AutomationProperties.AutomationId" Value="EpAppBarButton" />
+                <Setter Property="AutomationProperties.Name" Value="Eclipse Phase" />
+                <Setter Property="Content" Value="&#xE10B;" />
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
