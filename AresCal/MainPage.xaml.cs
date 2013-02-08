@@ -23,7 +23,9 @@ using ArkaneSystems.AresCal.TileUpdater;
 using Callisto.Controls;
 
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ApplicationSettings;
@@ -48,13 +50,13 @@ namespace ArkaneSystems.AresCal
 
         private int cachedDayOfWeek = 0;
 
+        private DataTransferManager dataTransferManager;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
-
-            
         }
 
         private void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
@@ -179,6 +181,18 @@ namespace ArkaneSystems.AresCal
             TileUpdateScheduler.CreateScheduledUpdates();
 
             await this.CreateTileUpdaterTask();
+
+            // Register this as a share source.
+            this.dataTransferManager = DataTransferManager.GetForCurrentView();
+            this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            // Unregister this as a share source.
+            this.dataTransferManager.DataRequested -= new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
         }
 
         private async Task CreateTileUpdaterTask()
@@ -320,6 +334,20 @@ namespace ArkaneSystems.AresCal
         private void AppBar_Closed(object sender, object e)
         {
             this.adControl.Visibility = Visibility.Visible;
+        }
+
+        // Enable sharing of data.
+        private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            DataPackage requestData = args.Request.Data;
+
+            MartianDateTime mdt = new MartianDateTime();
+            string share = String.Format("{0} AMT, {1}", mdt.Time, mdt.Date);
+
+            requestData.Properties.Title = share;
+            requestData.Properties.ApplicationName = "AresCal";
+            // requestData.Properties.ApplicationListingUri
+            requestData.SetText(share);   
         }
     }
 }
