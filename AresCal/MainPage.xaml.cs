@@ -27,6 +27,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ApplicationSettings;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -52,6 +53,8 @@ namespace ArkaneSystems.AresCal
             this.InitializeComponent();
 
             SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
+
+            
         }
 
         private void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
@@ -74,6 +77,14 @@ namespace ArkaneSystems.AresCal
                 // Set content for the flyout.
                 settings.Content = new SettingsContent();
 
+                // Handle the ad control.
+                settings.Closed += (o, o1) =>
+                    {
+                        this.adControl.Visibility = Visibility.Visible;
+                    };
+
+                this.adControl.Visibility = Visibility.Collapsed;
+
                 // Open it.
                 settings.IsOpen = true;
             });
@@ -93,6 +104,14 @@ namespace ArkaneSystems.AresCal
 
                 // Set content for the flyout.
                 settings.Content = new PrivacyContent();
+
+                // Handle the ad control.
+                settings.Closed += (o, o1) =>
+                {
+                    this.adControl.Visibility = Visibility.Visible;
+                };
+
+                this.adControl.Visibility = Visibility.Collapsed;
 
                 // Open it.
                 settings.IsOpen = true;
@@ -268,6 +287,39 @@ namespace ArkaneSystems.AresCal
             }
 
             ContentGrid.Background = new ImageBrush() { ImageSource = backgroundImage, Stretch = Stretch.UniformToFill, Opacity = 0.8};
+        }
+
+        private void OnVisualStateChanging(object sender, Windows.UI.Xaml.VisualStateChangedEventArgs e)
+        {
+            // Update the advertisement block to match the layout.
+            switch (e.NewState.Name)
+            {
+                case "FullScreenLandscape":
+                case "Filled":
+                    adControl.AdUnitId = "10058667";
+                    adControl.Refresh();
+                    break;
+
+                case "Snapped":
+                    adControl.AdUnitId = "10058780";
+                    adControl.Refresh();
+                    break;
+
+                case "FullScreenPortrait":
+                    adControl.AdUnitId = "10058781";
+                    adControl.Refresh();
+                    break;
+            }
+        }
+
+        private void AppBar_Opened(object sender, object e)
+        {
+            this.adControl.Visibility = Visibility.Collapsed;
+        }
+
+        private void AppBar_Closed(object sender, object e)
+        {
+            this.adControl.Visibility = Visibility.Visible;
         }
     }
 }

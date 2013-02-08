@@ -20,7 +20,10 @@
         <DefaultTile ShowName="allLogos" WideLogo="Assets\AresCal-WideLogo.png" ShortName="AresCal" />
         <SplashScreen Image="Assets\AresCal-SplashScreen.png" BackgroundColor="#000000" />
         <InitialRotationPreference>
+          <Rotation Preference="portrait" />
           <Rotation Preference="landscape" />
+          <Rotation Preference="portraitFlipped" />
+          <Rotation Preference="landscapeFlipped" />
         </InitialRotationPreference>
       </VisualElements>
       <Extensions>
