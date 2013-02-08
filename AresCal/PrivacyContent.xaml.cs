@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿#region header
+
+// AresCal - PrivacyContent.xaml.cs
+// 
+// Alistair J. R. Young
+// Arkane Systems
+// 
+// Copyright Arkane Systems 2012-2013.  All rights reserved.
+// 
+// Licensed and made available under MS-PL: http://opensource.org/licenses/ms-pl .
+// 
+// Created: 2013-02-07 11:51 AM
+
+#endregion
+
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 

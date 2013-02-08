@@ -1,8 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region header
+
+// AresCal.TileUpdater - MartianDateTime.cs
+// 
+// Alistair J. R. Young
+// Arkane Systems
+// 
+// Copyright Arkane Systems 2012-2013.  All rights reserved.
+// 
+// Licensed and made available under MS-PL: http://opensource.org/licenses/ms-pl .
+// 
+// Created: 2013-02-07 7:24 AM
+
+#endregion
+
+using System;
 
 using Windows.Storage;
 
@@ -13,6 +24,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
         private readonly DateTimeOffset unixEpoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
         #region Constructors
+
         public MartianDateTime()
             : this(DateTimeOffset.Now.ToUniversalTime())
         {}
@@ -23,10 +35,10 @@ namespace ArkaneSystems.AresCal.TileUpdater
 
             // Compute time data, based on supplied DateTimeOffset.
             // Get the Julian date (Earthside).
-            double modifiedJulianDate = ((date - this.unixEpoch).TotalSeconds / 86400) + 2440587.5 - 2400000.5;
+            double modifiedJulianDate = ((date - this.unixEpoch).TotalSeconds/86400) + 2440587.5 - 2400000.5;
 
             // Compute from this the Martian sol date.
-            this.MartianSolDate = (modifiedJulianDate - 51549.0) / 1.02749125 + 44795.9998;
+            this.MartianSolDate = (modifiedJulianDate - 51549.0)/1.02749125 + 44795.9998;
 
             // subtract epoch to get elapsed time since.
             double elapsed = this.MartianSolDate - 143.00708;
@@ -34,15 +46,15 @@ namespace ArkaneSystems.AresCal.TileUpdater
             // Convert elapsed time to a count of sols and seconds.
             this.TotalSols = Convert.ToInt32(Math.Round(elapsed - 0.5, MidpointRounding.AwayFromZero));
             int seconds = Convert.ToInt32(Math.Round(
-                (elapsed - Math.Round(elapsed - 0.5, MidpointRounding.AwayFromZero)) * 88775,
+                (elapsed - Math.Round(elapsed - 0.5, MidpointRounding.AwayFromZero))*88775,
                 MidpointRounding.AwayFromZero));
 
             // Compute time portion.
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
+            int minutes = seconds/60;
+            seconds = seconds%60;
 
-            int hours = minutes / 60;
-            minutes = minutes % 60;
+            int hours = minutes/60;
+            minutes = minutes%60;
 
             // TODO: Time Zone Adjustment
 
@@ -53,7 +65,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
 
             if ((roamingSettings.Values.ContainsKey("tsFreezeDuringGap")) &&
-                ((bool) roamingSettings.Values["tsFreezeDuringGap"] == true) &&
+                (bool) roamingSettings.Values["tsFreezeDuringGap"] &&
                 this.IsInGap)
             {
                 this.Time = "24:00:00";
@@ -69,15 +81,15 @@ namespace ArkaneSystems.AresCal.TileUpdater
             int sols = this.TotalSols;
 
             // First, let's pull out the decades, and add the 141 years for the epoch.
-            int annos = ((sols / 6686) * 10) + 141;
-            sols = sols % 6686;
+            int annos = ((sols/6686)*10) + 141;
+            sols = sols%6686;
 
             // Start chopping years and leap years.  Note that at this point, there cannot be more
             // than nine years and some spare sols in here.
             while (true)
             {
                 // Act differently depending on current year.
-                if ((annos % 2 == 1) || (annos % 10 == 0))
+                if ((annos%2 == 1) || (annos%10 == 0))
                 {
                     // Odd-numbered or 10-divisible leap year.)
                     if (sols < 669)
@@ -105,9 +117,9 @@ namespace ArkaneSystems.AresCal.TileUpdater
             int day = sols + 1;
 
             // Look up the month names.
-            var monthnames = this.GetMonthNameFromDay(ref day);
+            Tuple<string, string> monthnames = this.GetMonthNameFromDay(ref day);
 
-            this.DayOfWeek = day % 7;
+            this.DayOfWeek = day%7;
 
             string weeksol = this.GetSolOfWeek(this.DayOfWeek);
             string weekday = this.GetDayOfWeek(this.DayOfWeek);
@@ -115,6 +127,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
             this.Date = String.Format("{0}, {1:d} {2} {3:d}", weeksol, annos, monthnames.Item1, day);
             this.EclipsePhaseDate = String.Format("{0}, {1:d} {2} {3:d}", weekday, annos, monthnames.Item2, day);
         }
+
         #endregion
 
         public double MartianSolDate { get; private set; }
@@ -146,8 +159,8 @@ namespace ArkaneSystems.AresCal.TileUpdater
                 tsSols = tsSols - 40617;
 
                 // Pull out the decades.
-                int tsAnnos = ((tsSols / 6686) * 10) + (-10);
-                tsSols = tsSols % 6686;
+                int tsAnnos = ((tsSols/6686)*10) + (-10);
+                tsSols = tsSols%6686;
 
                 // Chop years and leap years.  This is, believe it or not, an irregular pattern:
                 // years ending 1, 3 6, 8 aren't, years ending 2, 4, 5, 7, 9, 0 are.
@@ -155,7 +168,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
                 {
                     int daysInSol;
 
-                    switch (tsAnnos % 10)
+                    switch (tsAnnos%10)
                     {
                         case 1:
                         case 3:
@@ -194,7 +207,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
                 int tsDay = tsSols + 1;
 
                 string tsMonth = this.GetTsMonthFromDay(ref tsDay);
-                string tsWeekday = this.GetDayOfWeek(tsDay % 7);
+                string tsWeekday = this.GetDayOfWeek(tsDay%7);
 
                 return String.Format("{0}, {1:d} {2}, m{3:d4}", tsWeekday, tsDay, tsMonth, tsAnnos);
             }
@@ -327,7 +340,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
         {
             switch (dow)
             {
-                // In encounter order for results of the modulus operation.
+                    // In encounter order for results of the modulus operation.
                 case 1:
                     return @"Sol Solis";
 
@@ -358,7 +371,7 @@ namespace ArkaneSystems.AresCal.TileUpdater
         {
             switch (dow)
             {
-                // In encounter order for results of the modulus operation.
+                    // In encounter order for results of the modulus operation.
 
                 case 1:
                     return @"Sunday";

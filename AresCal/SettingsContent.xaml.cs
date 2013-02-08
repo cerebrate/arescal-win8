@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿#region header
+
+// AresCal - SettingsContent.xaml.cs
+// 
+// Alistair J. R. Young
+// Arkane Systems
+// 
+// Copyright Arkane Systems 2012-2013.  All rights reserved.
+// 
+// Licensed and made available under MS-PL: http://opensource.org/licenses/ms-pl .
+// 
+// Created: 2013-02-07 11:34 AM
+
+#endregion
+
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -30,14 +34,14 @@ namespace ArkaneSystems.AresCal
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
 
             if (roamingSettings.Values.ContainsKey("tsFreezeDuringGap"))
-                tsFreezeDuringGap.IsOn = (bool)roamingSettings.Values["tsFreezeDuringGap"];
+                this.tsFreezeDuringGap.IsOn = (bool) roamingSettings.Values["tsFreezeDuringGap"];
         }
-        
+
         private void tsFreezeDuringGap_Toggled(object sender, RoutedEventArgs e)
         {
             // When setting is toggled, save it.
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
-            roamingSettings.Values["tsFreezeDuringGap"] = tsFreezeDuringGap.IsOn;
+            roamingSettings.Values["tsFreezeDuringGap"] = this.tsFreezeDuringGap.IsOn;
         }
     }
 }

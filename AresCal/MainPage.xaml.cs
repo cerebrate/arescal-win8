@@ -25,7 +25,6 @@ using Callisto.Controls;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ApplicationSettings;
@@ -48,7 +47,7 @@ namespace ArkaneSystems.AresCal
         private const string TASK_NAME_TIMER = "TileUpdaterTime";
         private const string TASK_ENTRY = "ArkaneSystems.AresCal.TileUpdater.TileUpdater";
 
-        private int cachedDayOfWeek = 0;
+        private int cachedDayOfWeek;
 
         private DataTransferManager dataTransferManager;
 
@@ -56,68 +55,70 @@ namespace ArkaneSystems.AresCal
         {
             this.InitializeComponent();
 
-            SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
+            SettingsPane.GetForCurrentView().CommandsRequested += this.MainPage_CommandsRequested;
         }
 
         private void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
         {
-            ResourceLoader rl = new ResourceLoader();
+            var rl = new ResourceLoader();
 
-            SettingsCommand sc = new SettingsCommand("options", rl.GetString("OptionsCommandText"), (x) =>
-            {
-                // Create a new instance of the flyout.
-                SettingsFlyout settings = new SettingsFlyout();
+            var sc = new SettingsCommand("options",
+                                         rl.GetString("OptionsCommandText"),
+                                         (x) =>
+                                             {
+                                                 // Create a new instance of the flyout.
+                                                 var settings = new SettingsFlyout();
 
-                // Change header and content background colors away from defaults.
-                settings.HeaderBrush = new SolidColorBrush(Colors.DarkGray);
-                settings.HeaderText = rl.GetString("OptionsCommandText");
+                                                 // Change header and content background colors away from defaults.
+                                                 settings.HeaderBrush = new SolidColorBrush(Colors.DarkGray);
+                                                 settings.HeaderText = rl.GetString("OptionsCommandText");
 
-                // Provide logo.
-                BitmapImage bmp = new BitmapImage(new Uri("ms-appx:///Assets/AresCal-SmallLogo.png"));
-                settings.SmallLogoImageSource = bmp;
+                                                 // Provide logo.
+                                                 var bmp =
+                                                     new BitmapImage(new Uri("ms-appx:///Assets/AresCal-SmallLogo.png"));
+                                                 settings.SmallLogoImageSource = bmp;
 
-                // Set content for the flyout.
-                settings.Content = new SettingsContent();
+                                                 // Set content for the flyout.
+                                                 settings.Content = new SettingsContent();
 
-                // Handle the ad control.
-                settings.Closed += (o, o1) =>
-                    {
-                        this.adControl.Visibility = Visibility.Visible;
-                    };
+                                                 // Handle the ad control.
+                                                 settings.Closed +=
+                                                     (o, o1) => { this.adControl.Visibility = Visibility.Visible; };
 
-                this.adControl.Visibility = Visibility.Collapsed;
+                                                 this.adControl.Visibility = Visibility.Collapsed;
 
-                // Open it.
-                settings.IsOpen = true;
-            });
+                                                 // Open it.
+                                                 settings.IsOpen = true;
+                                             });
 
-            SettingsCommand pc = new SettingsCommand("privacy", rl.GetString("PrivacyCommandText"), (x) =>
-            {
-                // Create a new instance of the flyout.
-                SettingsFlyout settings = new SettingsFlyout();
+            var pc = new SettingsCommand("privacy",
+                                         rl.GetString("PrivacyCommandText"),
+                                         (x) =>
+                                             {
+                                                 // Create a new instance of the flyout.
+                                                 var settings = new SettingsFlyout();
 
-                // Change header and content background colors away from defaults.
-                settings.HeaderBrush = new SolidColorBrush(Colors.DarkGray);
-                settings.HeaderText = rl.GetString("PrivacyCommandText");
+                                                 // Change header and content background colors away from defaults.
+                                                 settings.HeaderBrush = new SolidColorBrush(Colors.DarkGray);
+                                                 settings.HeaderText = rl.GetString("PrivacyCommandText");
 
-                // Provide logo.
-                BitmapImage bmp = new BitmapImage(new Uri("ms-appx:///Assets/AresCal-SmallLogo.png"));
-                settings.SmallLogoImageSource = bmp;
+                                                 // Provide logo.
+                                                 var bmp =
+                                                     new BitmapImage(new Uri("ms-appx:///Assets/AresCal-SmallLogo.png"));
+                                                 settings.SmallLogoImageSource = bmp;
 
-                // Set content for the flyout.
-                settings.Content = new PrivacyContent();
+                                                 // Set content for the flyout.
+                                                 settings.Content = new PrivacyContent();
 
-                // Handle the ad control.
-                settings.Closed += (o, o1) =>
-                {
-                    this.adControl.Visibility = Visibility.Visible;
-                };
+                                                 // Handle the ad control.
+                                                 settings.Closed +=
+                                                     (o, o1) => { this.adControl.Visibility = Visibility.Visible; };
 
-                this.adControl.Visibility = Visibility.Collapsed;
+                                                 this.adControl.Visibility = Visibility.Collapsed;
 
-                // Open it.
-                settings.IsOpen = true;
-            });
+                                                 // Open it.
+                                                 settings.IsOpen = true;
+                                             });
 
             args.Request.ApplicationCommands.Add(sc);
             args.Request.ApplicationCommands.Add(pc);
@@ -141,21 +142,21 @@ namespace ArkaneSystems.AresCal
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
 
             if (roamingSettings.Values.ContainsKey("tsEnabled"))
-                TsToggle.IsChecked = (bool)roamingSettings.Values["tsEnabled"];
+                this.TsToggle.IsChecked = (bool) roamingSettings.Values["tsEnabled"];
 
             if (roamingSettings.Values.ContainsKey("epEnabled"))
-                EpToggle.IsChecked = (bool)roamingSettings.Values["epEnabled"];
+                this.EpToggle.IsChecked = (bool) roamingSettings.Values["epEnabled"];
 
             // Restore values contained in session state.
             if (pageState != null && pageState.ContainsKey("txtSolDate"))
             {
                 // If it contains one, it contains all.
-                SolDate.Text = pageState["txtSolDate"].ToString();
-                Date.Text = pageState["txtDate"].ToString();
-                Time.Text = pageState["txtTime"].ToString();
-                TsDate.Text = pageState["txtTranshuman"].ToString();
-                EpDate.Text = pageState["txtEclipsePhase"].ToString();
-            } 
+                this.SolDate.Text = pageState["txtSolDate"].ToString();
+                this.Date.Text = pageState["txtDate"].ToString();
+                this.Time.Text = pageState["txtTime"].ToString();
+                this.TsDate.Text = pageState["txtTranshuman"].ToString();
+                this.EpDate.Text = pageState["txtEclipsePhase"].ToString();
+            }
         }
 
         /// <summary>
@@ -167,11 +168,11 @@ namespace ArkaneSystems.AresCal
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
             // Save the current UI text.
-            pageState["txtSolDate"] = SolDate.Text;
-            pageState["txtDate"] = Date.Text;
-            pageState["txtTime"] = Time.Text;
-            pageState["txtTranshuman"] = TsDate.Text;
-            pageState["txtEclipsePhase"] = EpDate.Text;
+            pageState["txtSolDate"] = this.SolDate.Text;
+            pageState["txtDate"] = this.Date.Text;
+            pageState["txtTime"] = this.Time.Text;
+            pageState["txtTranshuman"] = this.TsDate.Text;
+            pageState["txtEclipsePhase"] = this.EpDate.Text;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -184,7 +185,7 @@ namespace ArkaneSystems.AresCal
 
             // Register this as a share source.
             this.dataTransferManager = DataTransferManager.GetForCurrentView();
-            this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+            this.dataTransferManager.DataRequested += this.OnDataRequested;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -192,7 +193,7 @@ namespace ArkaneSystems.AresCal
             base.OnNavigatedFrom(e);
 
             // Unregister this as a share source.
-            this.dataTransferManager.DataRequested -= new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+            this.dataTransferManager.DataRequested -= this.OnDataRequested;
         }
 
         private async Task CreateTileUpdaterTask()
@@ -223,16 +224,16 @@ namespace ArkaneSystems.AresCal
             }
         }
 
-        private void TsToggle_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void TsToggle_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
-            roamingSettings.Values["tsEnabled"] = TsToggle.IsChecked;
+            roamingSettings.Values["tsEnabled"] = this.TsToggle.IsChecked;
         }
 
-        private void EpToggle_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void EpToggle_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
-            roamingSettings.Values["epEnabled"] = EpToggle.IsChecked;
+            roamingSettings.Values["epEnabled"] = this.EpToggle.IsChecked;
         }
 
         public void DoTimeUpdate()
@@ -240,19 +241,19 @@ namespace ArkaneSystems.AresCal
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
 
             // Get current martian datetime.
-            MartianDateTime mdt = new MartianDateTime();
+            var mdt = new MartianDateTime();
 
-            SolDate.Text = String.Format("{0:f6}", mdt.MartianSolDate);
-            Time.Text = mdt.Time;
-            Date.Text = mdt.Date;
+            this.SolDate.Text = String.Format("{0:f6}", mdt.MartianSolDate);
+            this.Time.Text = mdt.Time;
+            this.Date.Text = mdt.Date;
 
             if ((roamingSettings.Values.ContainsKey("epEnabled")) &&
-                ((bool)roamingSettings.Values["epEnabled"] == true))
-                EpDate.Text = mdt.EclipsePhaseDate;
+                (bool) roamingSettings.Values["epEnabled"])
+                this.EpDate.Text = mdt.EclipsePhaseDate;
 
             if ((roamingSettings.Values.ContainsKey("tsEnabled")) &&
-                ((bool)roamingSettings.Values["tsEnabled"] == true))
-                TsDate.Text = mdt.TranshumanSpaceDate;
+                (bool) roamingSettings.Values["tsEnabled"])
+                this.TsDate.Text = mdt.TranshumanSpaceDate;
 
             // If necessary, update background.
             if (mdt.DayOfWeek != this.cachedDayOfWeek)
@@ -300,28 +301,33 @@ namespace ArkaneSystems.AresCal
                     throw new IndexOutOfRangeException();
             }
 
-            ContentGrid.Background = new ImageBrush() { ImageSource = backgroundImage, Stretch = Stretch.UniformToFill, Opacity = 0.8};
+            this.ContentGrid.Background = new ImageBrush
+                {
+                    ImageSource = backgroundImage,
+                    Stretch = Stretch.UniformToFill,
+                    Opacity = 0.8
+                };
         }
 
-        private void OnVisualStateChanging(object sender, Windows.UI.Xaml.VisualStateChangedEventArgs e)
+        private void OnVisualStateChanging(object sender, VisualStateChangedEventArgs e)
         {
             // Update the advertisement block to match the layout.
             switch (e.NewState.Name)
             {
                 case "FullScreenLandscape":
                 case "Filled":
-                    adControl.AdUnitId = "10058667";
-                    adControl.Refresh();
+                    this.adControl.AdUnitId = "10058667";
+                    this.adControl.Refresh();
                     break;
 
                 case "Snapped":
-                    adControl.AdUnitId = "10058780";
-                    adControl.Refresh();
+                    this.adControl.AdUnitId = "10058780";
+                    this.adControl.Refresh();
                     break;
 
                 case "FullScreenPortrait":
-                    adControl.AdUnitId = "10058781";
-                    adControl.Refresh();
+                    this.adControl.AdUnitId = "10058781";
+                    this.adControl.Refresh();
                     break;
             }
         }
@@ -341,13 +347,13 @@ namespace ArkaneSystems.AresCal
         {
             DataPackage requestData = args.Request.Data;
 
-            MartianDateTime mdt = new MartianDateTime();
+            var mdt = new MartianDateTime();
             string share = String.Format("{0} AMT, {1}", mdt.Time, mdt.Date);
 
             requestData.Properties.Title = share;
             requestData.Properties.ApplicationName = "AresCal";
             // requestData.Properties.ApplicationListingUri
-            requestData.SetText(share);   
+            requestData.SetText(share);
         }
     }
 }

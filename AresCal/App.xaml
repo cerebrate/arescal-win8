@@ -17,7 +17,7 @@
 
             <!-- application name -->
             <x:String x:Key="AppName">AresCal</x:String>
-        
+
             <!-- AppBar buttons -->
             <Style x:Key="ToggleAppBarButtonStyle" TargetType="ToggleButton">
                 <Setter Property="Foreground" Value="{StaticResource AppBarItemForegroundThemeBrush}" />

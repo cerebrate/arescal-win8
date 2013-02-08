@@ -8,9 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200">
-    
+
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="180" Margin="10,10,0,0" TextWrapping="Wrap" Text="AresCal accesses the Internet only to retrieve advertising content from Microsoft Advertising.  No personal or system data is transmitted, stored, or otherwise processed by AresCal." VerticalAlignment="Top" FontFamily="Calibri" FontSize="18" />
+        <TextBlock HorizontalAlignment="Left" Height="180" Margin="10,10,0,0" TextWrapping="Wrap"
+                   Text="AresCal accesses the Internet only to retrieve advertising content from Microsoft Advertising.  No personal or system data is transmitted, stored, or otherwise processed by AresCal."
+                   VerticalAlignment="Top" FontFamily="Calibri" FontSize="18" />
 
     </Grid>
 </UserControl>

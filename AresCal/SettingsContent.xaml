@@ -46,84 +46,101 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleSwitch">
                         <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal" />
                                     <VisualState x:Name="PointerOver">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchCurtain"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchCurtainPointerOverBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchCurtainPointerOverBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerBorder"
-                                                                       Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchTrackPointerOverBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchTrackPointerOverBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchThumbPointerOverBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchThumbPointerOverBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchThumbPointerOverBorderLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchThumbPointerOverBorderLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchCurtain"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchCurtainPressedBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchCurtainPressedBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerBorder"
-                                                                       Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchTrackPressedBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchTrackPressedBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchThumbPressedBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchThumbPressedBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchThumbPressedForegroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchThumbPressedForegroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchHeaderDisabledForegroundLocalBrush}" />
+                                            <ObjectAnimationUsingKeyFrames
+                                                Storyboard.TargetName="HeaderContentPresenter"
+                                                Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchHeaderDisabledForegroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OffContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchDisabledForegroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchDisabledForegroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OnContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchDisabledForegroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchDisabledForegroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchOuterBorderDisabledBorderLocalBrush}" />
+                                                                           Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchOuterBorderDisabledBorderLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerBorder"
-                                                                       Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchTrackDisabledBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchTrackDisabledBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchThumbDisabledBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchThumbDisabledBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchThumbDisabledBorderLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchThumbDisabledBorderLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchCurtain"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchCurtainDisabledBackgroundLocalBrush}" />
+                                                                           Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource ToggleSwitchCurtainDisabledBackgroundLocalBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -131,39 +148,47 @@
                                 <VisualStateGroup x:Name="ToggleStates">
                                     <VisualStateGroup.Transitions>
                                         <VisualTransition x:Name="DraggingToOnTransition"
-                                                      From="Dragging"
-                                                      To="On"
-                                                      GeneratedDuration="0">
+                                                          From="Dragging"
+                                                          To="On"
+                                                          GeneratedDuration="0">
                                             <Storyboard>
-                                                <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOnOffset}" />
-                                                <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainCurrentToOnOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchKnob"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOnOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchCurtain"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainCurrentToOnOffset}" />
                                             </Storyboard>
                                         </VisualTransition>
                                         <VisualTransition x:Name="DraggingToOffTransition"
-                                                      From="Dragging"
-                                                      To="Off"
-                                                      GeneratedDuration="0">
+                                                          From="Dragging"
+                                                          To="Off"
+                                                          GeneratedDuration="0">
                                             <Storyboard>
-                                                <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOffOffset}" />
-                                                <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainCurrentToOffOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchKnob"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOffOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchCurtain"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainCurrentToOffOffset}" />
                                             </Storyboard>
                                         </VisualTransition>
                                         <VisualTransition x:Name="OnToOffTransition"
-                                                      From="On"
-                                                      To="Off"
-                                                      GeneratedDuration="0">
+                                                          From="On"
+                                                          To="Off"
+                                                          GeneratedDuration="0">
                                             <Storyboard>
-                                                <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOnToOffOffset}" />
-                                                <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainOnToOffOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchKnob"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOnToOffOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchCurtain"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainOnToOffOffset}" />
                                             </Storyboard>
                                         </VisualTransition>
                                         <VisualTransition x:Name="OffToOnTransition"
-                                                      From="Off"
-                                                      To="On"
-                                                      GeneratedDuration="0">
+                                                          From="Off"
+                                                          To="On"
+                                                          GeneratedDuration="0">
                                             <Storyboard>
-                                                <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOffToOnOffset}" />
-                                                <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainOffToOnOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchKnob"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOffToOnOffset}" />
+                                                <RepositionThemeAnimation TargetName="SwitchCurtain"
+                                                                          FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainOffToOnOffset}" />
                                             </Storyboard>
                                         </VisualTransition>
                                     </VisualStateGroup.Transitions>
@@ -171,21 +196,21 @@
                                     <VisualState x:Name="Off">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="CurtainTranslateTransform"
-                                                         Storyboard.TargetProperty="X"
-                                                         To="-44"
-                                                         Duration="0" />
+                                                             Storyboard.TargetProperty="X"
+                                                             To="-44"
+                                                             Duration="0" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="On">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="CurtainTranslateTransform"
-                                                         Storyboard.TargetProperty="X"
-                                                         To="0"
-                                                         Duration="0" />
+                                                             Storyboard.TargetProperty="X"
+                                                             To="0"
+                                                             Duration="0" />
                                             <DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
-                                                         Storyboard.TargetProperty="X"
-                                                         To="38"
-                                                         Duration="0" />
+                                                             Storyboard.TargetProperty="X"
+                                                             To="38"
+                                                             Duration="0" />
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -193,10 +218,11 @@
                                     <VisualState x:Name="OffContent">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="OffContentPresenter"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="OffContentPresenter">
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1"
+                                                             Duration="0" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
+                                                                           Storyboard.TargetName="OffContentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0">
                                                     <DiscreteObjectKeyFrame.Value>
                                                         <x:Boolean>True</x:Boolean>
@@ -208,10 +234,11 @@
                                     <VisualState x:Name="OnContent">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="OnContentPresenter"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="OnContentPresenter">
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1"
+                                                             Duration="0" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
+                                                                           Storyboard.TargetName="OnContentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0">
                                                     <DiscreteObjectKeyFrame.Value>
                                                         <x:Boolean>True</x:Boolean>
@@ -225,13 +252,13 @@
                                     <VisualState x:Name="Focused">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0" />
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1"
+                                                             Duration="0" />
                                             <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0" />
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1"
+                                                             Duration="0" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Unfocused" />
@@ -244,12 +271,12 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <ContentPresenter x:Name="HeaderContentPresenter"
-                                              Foreground="{StaticResource ToggleSwitchHeaderForegroundLocalBrush}"
-                                              Margin="6"
-                                              Grid.ColumnSpan="2"
-                                              Content="{TemplateBinding Header}"
-                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                              FontWeight="Semilight" />
+                                                  Foreground="{StaticResource ToggleSwitchHeaderForegroundLocalBrush}"
+                                                  Margin="6"
+                                                  Grid.ColumnSpan="2"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                  FontWeight="Semilight" />
                                 <Grid Grid.Row="1" Margin="{TemplateBinding Padding}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -257,39 +284,40 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter x:Name="OffContentPresenter"
-                                                  MinWidth="65"
-                                                  Margin="6,5,0,16"
-                                                  Opacity="0"
-                                                  IsHitTestVisible="False"
-                                                  Content="{TemplateBinding OffContent}"
-                                                  ContentTemplate="{TemplateBinding OffContentTemplate}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                      MinWidth="65"
+                                                      Margin="6,5,0,16"
+                                                      Opacity="0"
+                                                      IsHitTestVisible="False"
+                                                      Content="{TemplateBinding OffContent}"
+                                                      ContentTemplate="{TemplateBinding OffContentTemplate}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     <ContentPresenter x:Name="OnContentPresenter"
-                                                  MinWidth="65"
-                                                  Margin="6,5,0,16"
-                                                  Opacity="0"
-                                                  IsHitTestVisible="False"
-                                                  Content="{TemplateBinding OnContent}"
-                                                  ContentTemplate="{TemplateBinding OnContentTemplate}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                      MinWidth="65"
+                                                      Margin="6,5,0,16"
+                                                      Opacity="0"
+                                                      IsHitTestVisible="False"
+                                                      Content="{TemplateBinding OnContent}"
+                                                      ContentTemplate="{TemplateBinding OnContentTemplate}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     <Grid Grid.Column="2" Background="Transparent">
                                         <Grid x:Name="SwitchKnobBounds" Height="19" Margin="13,5,13,16">
                                             <Border x:Name="OuterBorder"
-                                                BorderBrush="{StaticResource ToggleSwitchOuterBorderBorderLocalBrush}"
-                                                BorderThickness="2">
+                                                    BorderBrush="{StaticResource ToggleSwitchOuterBorderBorderLocalBrush}"
+                                                    BorderThickness="2">
                                                 <Border x:Name="InnerBorder"
-                                                    Background="{StaticResource ToggleSwitchTrackBackgroundLocalBrush}"
-                                                    BorderBrush="{StaticResource ToggleSwitchTrackBorderLocalBrush}"
-                                                    BorderThickness="1">
+                                                        Background="{StaticResource ToggleSwitchTrackBackgroundLocalBrush}"
+                                                        BorderBrush="{StaticResource ToggleSwitchTrackBorderLocalBrush}"
+                                                        BorderThickness="1">
                                                     <ContentPresenter x:Name="SwitchCurtainBounds">
                                                         <ContentPresenter x:Name="SwitchCurtainClip">
                                                             <Rectangle x:Name="SwitchCurtain"
-                                                                   Fill="{StaticResource ToggleSwitchCurtainBackgroundLocalBrush}"
-                                                                   Width="44">
+                                                                       Fill="{StaticResource ToggleSwitchCurtainBackgroundLocalBrush}"
+                                                                       Width="44">
                                                                 <Rectangle.RenderTransform>
-                                                                    <TranslateTransform x:Name="CurtainTranslateTransform" X="-44" />
+                                                                    <TranslateTransform
+                                                                        x:Name="CurtainTranslateTransform" X="-44" />
                                                                 </Rectangle.RenderTransform>
                                                             </Rectangle>
                                                         </ContentPresenter>
@@ -297,29 +325,29 @@
                                                 </Border>
                                             </Border>
                                             <Rectangle x:Name="SwitchKnob"
-                                                   Fill="{StaticResource ToggleSwitchThumbBackgroundLocalBrush}"
-                                                   Stroke="{StaticResource ToggleSwitchThumbBorderLocalBrush}"
-                                                   StrokeThickness="1"
-                                                   HorizontalAlignment="Left"
-                                                   Width="12">
+                                                       Fill="{StaticResource ToggleSwitchThumbBackgroundLocalBrush}"
+                                                       Stroke="{StaticResource ToggleSwitchThumbBorderLocalBrush}"
+                                                       StrokeThickness="1"
+                                                       HorizontalAlignment="Left"
+                                                       Width="12">
                                                 <Rectangle.RenderTransform>
                                                     <TranslateTransform x:Name="KnobTranslateTransform" />
                                                 </Rectangle.RenderTransform>
                                             </Rectangle>
                                             <Rectangle x:Name="FocusVisualWhite"
-                                                   Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
-                                                   StrokeEndLineCap="Square"
-                                                   StrokeDashArray="1,1"
-                                                   Opacity="0"
-                                                   Margin="-3"
-                                                   StrokeDashOffset="1.5" />
+                                                       Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
+                                                       StrokeEndLineCap="Square"
+                                                       StrokeDashArray="1,1"
+                                                       Opacity="0"
+                                                       Margin="-3"
+                                                       StrokeDashOffset="1.5" />
                                             <Rectangle x:Name="FocusVisualBlack"
-                                                   Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}"
-                                                   StrokeEndLineCap="Square"
-                                                   StrokeDashArray="1,1"
-                                                   Opacity="0"
-                                                   Margin="-3"
-                                                   StrokeDashOffset="0.5" />
+                                                       Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}"
+                                                       StrokeEndLineCap="Square"
+                                                       StrokeDashArray="1,1"
+                                                       Opacity="0"
+                                                       Margin="-3"
+                                                       StrokeDashOffset="0.5" />
                                         </Grid>
                                         <Thumb x:Name="SwitchThumb">
                                             <Thumb.Template>
@@ -338,7 +366,8 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <ToggleSwitch x:Name="tsFreezeDuringGap" Header="Transhuman Space:&#x0a;Freeze During &quot;Gap&quot;" HorizontalAlignment="Left" Margin="10"
+        <ToggleSwitch x:Name="tsFreezeDuringGap" Header="Transhuman Space:&#x0a;Freeze During &quot;Gap&quot;"
+                      HorizontalAlignment="Left" Margin="10"
                       VerticalAlignment="Top" Height="80" Toggled="tsFreezeDuringGap_Toggled" />
     </Grid>
 </UserControl>
