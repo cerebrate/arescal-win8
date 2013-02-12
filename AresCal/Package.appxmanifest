@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="b606d33b-ba0d-463d-9583-f4e304143638" Publisher="CN=avatar" Version="1.0.0.0" />
+  <Identity Name="ArkaneSystems.AresCal" Publisher="CN=53C0D6B7-57FF-41F4-9798-4276B30D8987" Version="1.0.0.0" />
   <Properties>
     <DisplayName>AresCal</DisplayName>
     <PublisherDisplayName>Arkane Systems</PublisherDisplayName>

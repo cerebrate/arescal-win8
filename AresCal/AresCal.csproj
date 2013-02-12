@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>AresCal_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>AresCal_StoreKey.pfx</PackageCertificateKeyFile>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
     <SccProjectName>&lt;Project Location In Database&gt;</SccProjectName>
     <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
@@ -20,6 +20,8 @@
     <SccProvider>Mercurial Source Control Package</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <PackageCertificateThumbprint>21FDA08221BBDBCB575CF1D57A03881F51129A70</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -170,6 +172,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="AresCal_StoreKey.pfx" />
     <None Include="AresCal_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <PRIResource Include="Resources.resw" />
@@ -189,6 +192,7 @@
     <Content Include="Assets\Mars\mars_6.jpg" />
     <Content Include="Assets\Mars\mars_7.jpg" />
     <Content Include="Common\ReadMe.txt" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
