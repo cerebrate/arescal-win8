@@ -25,11 +25,14 @@ using Callisto.Controls;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ApplicationSettings;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
@@ -354,6 +357,53 @@ namespace ArkaneSystems.AresCal
             requestData.Properties.ApplicationName = "AresCal";
             // requestData.Properties.ApplicationListingUri
             requestData.SetText(share);
+        }
+
+        private Rect GetRect(object sender)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            GeneralTransform elementTransform = element.TransformToVisual(null);
+            Point point = elementTransform.TransformPoint(new Point());
+            return new Rect(point, new Size(element.ActualWidth, element.ActualHeight));
+        }
+
+        private async void DoCopyTextBlock(object sender, RightTappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+
+            var rl = new ResourceLoader();
+
+            PopupMenu p = new PopupMenu();
+            p.Commands.Add(new UICommand(rl.GetString("CopyCommandText"), (command) =>
+                {
+                    // Copy the sending text block to the clipboard.
+                    TextBlock tb = sender as TextBlock;
+                    string text = tb.Text;
+
+                    DataPackage dp = new DataPackage();
+                    dp.SetText(text);
+                    Clipboard.SetContent(dp);
+                }));
+            await p.ShowForSelectionAsync(GetRect(sender), Placement.Above);
+        }
+
+        private async void DoCopyTime(object sender, RightTappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+
+            var rl = new ResourceLoader();
+
+            PopupMenu p = new PopupMenu();
+            p.Commands.Add(new UICommand(rl.GetString("CopyCommandText"), (command) =>
+                {
+                    // Copy the current time to the clipboard.
+                    string text = String.Format("{0} AMT", new MartianDateTime().Time);
+
+                    DataPackage dp = new DataPackage();
+                    dp.SetText(text);
+                    Clipboard.SetContent(dp);
+                }));
+            await p.ShowForSelectionAsync(GetRect(sender), Placement.Above);
         }
     }
 }

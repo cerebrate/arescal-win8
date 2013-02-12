@@ -19,9 +19,9 @@
         <AppBar Opened="AppBar_Opened" Closed="AppBar_Closed">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <ToggleButton x:Name="TsToggle" Style="{StaticResource TsAppBarButtonStyle}" Click="TsToggle_Click"
-                              IsChecked="True" />
+                              IsChecked="False" />
                 <ToggleButton x:Name="EpToggle" Style="{StaticResource EpAppBarButtonStyle}" Click="EpToggle_Click"
-                              IsChecked="True" />
+                              IsChecked="False" />
             </StackPanel>
         </AppBar>
     </common:LayoutAwarePage.BottomAppBar>
@@ -66,16 +66,16 @@
                 <TextBlock TextWrapping="Wrap" Text="Martian Sol Date:" Style="{StaticResource BodyTextStyle}"
                            Margin="0,0,4,0" />
                 <TextBlock x:Name="SolDate" TextWrapping="Wrap" Text="0000.000000"
-                           Style="{StaticResource BodyTextStyle}" Margin="4,0,0,0" />
+                           Style="{StaticResource BodyTextStyle}" Margin="4,0,0,0" RightTapped="DoCopyTextBlock" />
             </StackPanel>
 
             <TextBlock x:Name="Date" HorizontalAlignment="Center" Margin="0" Grid.Row="1" TextWrapping="Wrap"
                        Text="Sol Solis, 000 Sagittarius 00" VerticalAlignment="Center"
-                       Style="{StaticResource SubheaderTextStyle}" />
+                       Style="{StaticResource SubheaderTextStyle}" RightTapped="DoCopyTextBlock" />
 
             <StackPanel HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal">
-                <TextBlock x:Name="Time" Margin="4" Text="12:00:00" Style="{StaticResource HeaderTextStyle}" />
-                <TextBlock x:Name="TimeZone" Margin="4" Text="AMT" Style="{StaticResource HeaderTextStyle}" />
+                <TextBlock x:Name="Time" Margin="4" Text="12:00:00" Style="{StaticResource HeaderTextStyle}" RightTapped="DoCopyTime" />
+                <TextBlock x:Name="TimeZone" Margin="4" Text="AMT" Style="{StaticResource HeaderTextStyle}" RightTapped="DoCopyTime" />
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center">
@@ -83,13 +83,13 @@
                             Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TsToggle}">
                     <TextBlock x:Name="textBlock" Margin="4" Style="{StaticResource SubheaderTextStyle}" Text="TS:" />
                     <TextBlock x:Name="TsDate" Margin="4" Style="{StaticResource SubheaderTextStyle}"
-                               Text="Sunday, 01 January, m+0001" />
+                               Text="Sunday, 01 January, m+0001" RightTapped="DoCopyTextBlock" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                             Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=EpToggle}">
                     <TextBlock x:Name="textBlock1" Margin="4" Style="{StaticResource SubheaderTextStyle}" Text="EP:" />
                     <TextBlock x:Name="EpDate" Margin="4" Style="{StaticResource SubheaderTextStyle}"
-                               Text="Sunday, 000 January 01" />
+                               Text="Sunday, 000 January 01" RightTapped="DoCopyTextBlock" />
                 </StackPanel>
             </StackPanel>
 
